@@ -349,19 +349,16 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--topmenu-background-right);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 #main-content {
     flex: 1; 
-    width: calc(100% - 10px); 
+    width: 100%; 
     overflow: auto; 
 
     display: flex; 
     flex-direction: column;
-
-    padding-right: 10px;
-    /*padding-bottom: 10px;*/
 }
 
 #main-content-inner {
@@ -447,6 +444,7 @@ footer {
     padding: 20px;
     text-align: center;
     border-radius: 5px; 
+    width: calc(100% - 40px); 
 }
 
 footer a {

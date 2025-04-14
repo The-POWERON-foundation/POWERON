@@ -229,13 +229,17 @@
                             intervals: [],
                         };
 
-                        let mainContent = document.getElementById("main-content-inner");
+                        let mainContentInner = document.getElementById("main-content-inner");
 
-                        mainContent.style.display = "block"; 
-                        mainContent.style.paddingBottom = "10px"; 
+                        mainContentInner.style.display = "block"; 
+                        mainContentInner.style.paddingBottom = "10px"; 
+                        mainContentInner.style.alignItems = ""; 
 
-                        mainContent.innerHTML = pages[page].content;
-                        nodeScriptReplace(mainContent);
+                        let mainContent = document.getElementById("main-content");
+                        mainContent.style.justifyContent = ""; 
+
+                        mainContentInner.innerHTML = pages[page].content;
+                        nodeScriptReplace(mainContentInner);
 
                         document.title = pages[page].title;
 

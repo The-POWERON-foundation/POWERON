@@ -3,6 +3,7 @@
     
     <div class="settings-container">
         <div id="settings-menu">
+            <div id="separator"></div>
             <button onclick="buffer.switchSettingsPage('profile')">Profile</button>
             <button onclick="buffer.switchSettingsPage('account')">Account</button>
         </div>
@@ -51,6 +52,10 @@
     buffer.mainContent.style.justifyContent = "center";
     buffer.mainContent.style.alignItems = "center";
     buffer.mainContent.style.paddingBottom = "0"; 
+
+    buffer.mainContentInner = document.getElementById("main-content-inner"); 
+    buffer.mainContentInner.style.flex = "1"; 
+    buffer.mainContentInner.style.width = "100%"; 
 
     buffer.settings = document.getElementById("settings");
     buffer.settingsNotLoggedIn = document.getElementById("settings-not-logged-in");
