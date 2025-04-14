@@ -1,0 +1,10 @@
+# Ignore node.js modules
+node_modules
+
+# Ignore the production environment file
+.env
+
+# Ignore all program files
+programs/*
+## Exclude the README file
+!programs/README.md

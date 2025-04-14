@@ -1,0 +1,72 @@
+<div id="settings" style="display: none">
+    <!-- <h1 class="center">Settings</h1> -->
+    
+    <div class="settings-container">
+        <div id="settings-menu">
+            <button onclick="buffer.switchSettingsPage('profile')">Profile</button>
+            <button onclick="buffer.switchSettingsPage('account')">Account</button>
+        </div>
+        <div id="settings-content">
+            <div id="settings-profile" style="display: block">
+                <h1 class="center">Profile</h1>
+
+                <form action="#">
+                    Nickname: <input type="text" id="change-nickname">
+                    <br>
+                    Bio: <textarea id="change-bio"></textarea>
+                    <br>
+                    <input type="submit" value="Save">
+                </form>
+            </div>
+            <div id="settings-account" style="display: none">
+                <h1 class="center">Account</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="settings-not-logged-in" style="display: block">
+    <h1 class="center">Settings</h1>
+
+    <p class="center">You must be logged in to view your account settings.</p>
+
+    <div class="settings-container"></div>
+</div>
+
+<script>
+    buffer.settingsContent = document.getElementById("settings-content"); 
+
+    buffer.switchSettingsPage = function(page) {
+        document.getElementById("settings-" + page).style.display = "flex";
+        for (let i = 0; i < buffer.settingsContent.children.length; i ++) {
+            buffer.settingsContent.children[i].style.display = "none";
+        }
+
+        document.getElementById("settings-" + page).style.display = "block";
+    }
+
+    buffer.mainContent = document.getElementById("main-content");
+    buffer.mainContent.style.display = "flex"; 
+    buffer.mainContent.style.flexDirection = "column";
+    buffer.mainContent.style.justifyContent = "center";
+    buffer.mainContent.style.alignItems = "center";
+    buffer.mainContent.style.paddingBottom = "0"; 
+
+    buffer.settings = document.getElementById("settings");
+    buffer.settingsNotLoggedIn = document.getElementById("settings-not-logged-in");
+
+    if (global.isLoggedIn) {
+        buffer.settings.style.display = "flex";
+        buffer.settingsNotLoggedIn.style.display = "none";
+    }
+    else {
+        buffer.settings.style.display = "none";
+        buffer.settingsNotLoggedIn.style.display = "block";
+    }
+
+    buffer.changeNickname = document.getElementById("change-nickname"); 
+    buffer.changeBio = document.getElementById("change-bio");
+
+    buffer.changeNickname.placeholder = global.nickname; 
+    buffer.changeBio.placeholder = global.bio;
+</script>

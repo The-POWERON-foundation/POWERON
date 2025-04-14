@@ -1,0 +1,11 @@
+{
+    "title": "Browse",
+    "scripts": [
+        "/cdn/scripts/program-list.js"
+    ],
+    "styles": [
+        "/cdn/styles/program-list.css"
+    ], 
+    "requiresSigninReload": false,
+    "content": "content.html"
+}

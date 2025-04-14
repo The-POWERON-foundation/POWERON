@@ -1,0 +1,55 @@
+#settings, #settings-not-logged-in {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    flex: 1; 
+}
+
+.settings-container {
+    width: 100%; 
+    flex: 1; 
+
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+}
+
+#settings-menu {
+    background-color: var(--light-background);
+    height: calc(100% - 5px); 
+
+    display: flex; 
+    flex-direction: column;
+
+    min-width: 200px; 
+    border-radius: 5px; 
+    padding-top: 5px; 
+}
+
+#settings-menu button {
+    color: var(--color); 
+
+    font-size: 1.1em; 
+    border: none; 
+
+    background: none; 
+    cursor: pointer; 
+
+    padding: 10px; 
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+}
+
+#settings-menu button:hover {
+    background-color: var(--hover-background); 
+}
+
+#settings-content {
+    flex: 1; 
+    height: 100%; 
+}

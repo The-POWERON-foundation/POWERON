@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/cdn/styles/themes/light.css">
+        <link rel="stylesheet" type="text/css" href="/cdn/styles/main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="/cdn/scripts/api.js"></script>
+        <script src="/cdn/scripts/cookie-parser.js"></script>
+    </head>
+    <body>
+        <!-- Topmenu -->
+        <div id="topmenu">
+            <!-- Hotbar -->
+            <div id="topmenu-hotbar">
+                <div class="topmenu-hotbar-space"></div>
+                <div id="topmenu-hotbar-inner">
+                    <a id="hotbar-home" href="/">
+                        <img src="/cdn/images/home.svg" style="transform: scale(.8)">
+                    </a>
+                    <a id="hotbar-browse" href="/browse">
+                        <img src="/cdn/images/leaderboard.svg">
+                    </a>
+                    <a id="hotbar-profile" href="/profile">
+                        <img src="/cdn/images/user.svg" style="transform: scale(.8)">
+                    </a>
+                    <div id="hotbar-mobile-space"></div>
+                </div>
+                <div class="topmenu-hotbar-space" id="topmenu-hotbar-space-2"></div>
+            </div>
+
+            <!-- POWER ON title -->
+            <a id="poweron-home" href="/">
+                <h1 id="poweron-home-title">POWERON</h1>
+                <h2 id="poweron-home-subtitle">The ultimate programming platform</h2>
+            </a>
+
+            <!-- Topmenu space -->
+            <div id="topmenu-space"></div>
+
+            <!-- Topmenu user options -->
+            <div id="topmenu-user-container">
+                <div id="topmenu-user" onclick="toggleTopmenuPopup()">
+                    <span id="topmenu-user-username"><img src="/cdn/images/loading-white.svg" style="height: 15px"></span>
+                    &nbsp;
+                    <div id="topmenu-user-arrow">
+                        <svg width="10" height="7" viewBox="0 0 10 7" style="fill: rgba(255, 255, 255, .5); transform: translate(3px, -1px);" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 0, 0 L 10, 0 L 5, 7"></path>
+                        </svg>  
+                    </div>      
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div id="content">
+            <!-- Popup -->
+            <div id="popup" style="opacity: 0; transform: translateY(-10px); pointer-events: none">
+                <div id="popup-signin" style="display: block">
+                    <div id="signin-switch-container">
+                        <div id="signin-switch">
+                            <div id="signin-switch-highlight" style="left: 0"></div>
+                            <button id="login-switch" onclick="loginSwitchClick()" style="color: white">Log in</button>
+                            <button id="signup-switch" onclick="signupSwitchClick()" style="color: black">Sign up</button>
+                        </div>
+                    </div>
+
+                    <div id="signin-form-container">
+                        <div id="login" style="display: flex">
+                            <form action="#" id="login-form">
+                                <div class="form-input">
+                                    <div class="form-input-icon-container">
+                                        <img src="cdn/images/user.svg" class="form-input-icon">
+                                    </div>
+                                    <input type="text" name="username" class="form-input-text" placeholder="Username" id="login-username">
+                                </div>
+                                <div class="form-input">
+                                    <div class="form-input-icon-container">
+                                        <img src="cdn/images/key.svg" class="form-input-icon">
+                                    </div>
+                                    <input type="password" name="password" class="form-input-text" placeholder="Password">
+                                </div>
+                                <input class="submit-button" id="login-submit" type="submit" value="Log in">
+                            </form>
+                        </div>
+
+                        <div id="signup" style="display: none">
+                            <form action="#" id="signup-form">
+                                <div class="form-input">
+                                    <div class="form-input-icon-container">
+                                        <img src="cdn/images/email.svg" class="form-input-icon">
+                                    </div>
+                                    <input type="email" name="email" class="form-input-text" placeholder="E-mail">
+                                </div>
+                                <div class="form-input">
+                                    <div class="form-input-icon-container">
+                                        <img src="cdn/images/user.svg" class="form-input-icon">
+                                    </div>
+                                    <input type="text" name="username" class="form-input-text" placeholder="Username">
+                                </div>
+                                <div class="form-input">
+                                    <div class="form-input-icon-container">
+                                        <img src="cdn/images/key.svg" class="form-input-icon">
+                                    </div>
+                                    <input type="password" name="password" class="form-input-text" placeholder="Password">
+                                </div>
+                                <input class="submit-button" id="signup-submit" type="submit" value="Sign up">
+                            </form>
+                        </div>
+
+                        <div id="signin-error" style="display: none"></div>
+                    </div>
+                </div>
+
+                <div id="popup-user" style="display: none">
+                    <button class="popup-user-button" onclick="alert('No new notifications')">Notifications</button>
+                    <a class="popup-user-button" href="/profile">Profile</a>
+                    <a class="popup-user-button" href="/settings">Settings</a>
+                    <button class="popup-user-button" onclick="logOut()">Log out</button>
+                </div>
+            </div>
+
+            <div id="main-content">
+                <div id="main-content-inner"></div>
+
+                <footer>
+                    <ul>
+                        <li><a href="/terms-of-service">Terms of Service</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#">GH</a>
+                        <a href="#">DS</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- Topmenu scripts -->
+            <script>
+                let api = new PowerAPI(); 
+
+                let pages = {}; 
+                let assetsCache = {
+                    scripts: {}, 
+                    styles: {},
+                };
+
+                let buffer = {
+                    timeouts: [], 
+                    intervals: [],
+                }; 
+
+                let global = {
+                    isLoggedIn: false,
+                    username: "", 
+                    nickname: "",
+                    bio: "",
+                    page: window.location.pathname.split("/")[1], 
+                    requiresSigninReload: false, 
+                }; 
+
+                function nodeScriptReplace(node) {
+                    if ( nodeScriptIs(node) === true ) {
+                        node.parentNode.replaceChild( nodeScriptClone(node) , node );
+                    }
+                    else {
+                        var i = -1, children = node.childNodes;
+                        while ( ++i < children.length ) {
+                            nodeScriptReplace( children[i] );
+                        }
+                    }
+
+                    return node;
+                }
+                function nodeScriptClone(node){
+                    var script  = document.createElement("script");
+                    script.text = node.innerHTML;
+
+                    var i = -1, attrs = node.attributes, attr;
+                    while ( ++i < attrs.length ) {                                    
+                        script.setAttribute( (attr = attrs[i]).name, attr.value );
+                    }
+                    return script;
+                }
+                function nodeScriptIs(node) {
+                    return node.tagName === 'SCRIPT';
+                }
+
+                let hotbarHome = document.getElementById("hotbar-home"); 
+                let hotbarBrowse = document.getElementById("hotbar-browse"); 
+                let hotbarProfile = document.getElementById("hotbar-profile"); 
+
+                function switchPage(page) {
+                    if (!page) {
+                        page = "home"; 
+                    }
+
+                    let topmenuHotbarInner = document.getElementById("topmenu-hotbar-inner");
+                    topmenuHotbarInner.querySelectorAll("a").forEach((a) => {
+                        a.style.background = ""; 
+                    }); 
+
+                    switch (page) {
+                        case "home":
+                            hotbarHome.style.background = "rgba(255, 255, 255, .2)"; 
+                            break;
+                        case "browse":
+                            hotbarBrowse.style.background = "rgba(255, 255, 255, .2)"; 
+                            break;
+                        case "profile":
+                            let subpage = window.location.pathname.split("/")[2]; 
+                            if (!subpage) {
+                                hotbarProfile.style.background = "rgba(255, 255, 255, .2)"; 
+                            }
+                            break;
+                    }
+
+                    global.page = page; 
+
+                    function pageLoaded() {
+                        buffer.timeouts.forEach((timeout) => {
+                            clearTimeout(timeout);
+                        });
+                        buffer.intervals.forEach((interval) => {
+                            clearInterval(interval);
+                        });
+
+                        buffer = {
+                            timeouts: [], 
+                            intervals: [],
+                        };
+
+                        let mainContent = document.getElementById("main-content-inner");
+
+                        mainContent.style.display = "block"; 
+                        mainContent.style.paddingBottom = "10px"; 
+
+                        mainContent.innerHTML = pages[page].content;
+                        nodeScriptReplace(mainContent);
+
+                        document.title = pages[page].title;
+
+                        global.requiresSigninReload = pages[page].requiresSigninReload; 
+                    }
+
+                    if (!pages[page]) {
+                        api.page(page, (res) => {
+                            if (res.status === 404) {
+                                res = {
+                                    title: "Not found", 
+                                    scripts: [], 
+                                    styles: [], 
+                                    content: `
+                                        <h1 class="center page-title" id="page-title">404 - Page not found</h1>
+                                        <p class="center">The page you're looking for does not exist. <a href="/">Return to homepage</a></p>
+                                    `
+                                };
+                            }
+                            pages[page] = res; 
+
+                            /* Load assets */
+                            let scripts = pages[page].scripts;
+                            let styles = pages[page].styles;
+
+                            let loadedAssets = 0; 
+
+                            function assetsLoadedCheck() {
+                                if (loadedAssets === scripts.length + styles.length) {
+                                    pageLoaded();
+                                }
+                            }
+
+                            scripts.forEach((script) => {
+                                if (!assetsCache.scripts[script]) {
+                                    fetch(script, { cache: "no-store" })
+                                        .then((response) => response.text())
+                                        .then((text) => {
+                                            assetsCache.scripts[script] = true;
+
+                                            const scriptNode = document.createElement("script");
+                                            scriptNode.innerHTML = text;
+                                            document.body.appendChild(scriptNode);
+
+                                            nodeScriptReplace(scriptNode);
+
+                                            loadedAssets ++;
+                                            assetsLoadedCheck();
+                                        });
+                                }
+                                else {
+                                    // Script already loaded, no need for execution
+                                    loadedAssets ++;
+                                    assetsLoadedCheck();
+                                }
+                            });
+
+                            styles.forEach((style) => {
+                                if (!assetsCache.styles[style]) {
+                                    fetch(style, { cache: "no-store" })
+                                        .then((response) => response.text())
+                                        .then((text) => {
+                                            assetsCache.styles[style] = true;
+
+                                            let styleElement = document.createElement("style");
+                                            styleElement.innerHTML = text;
+                                            document.body.appendChild(styleElement);
+
+                                            loadedAssets ++;
+                                            assetsLoadedCheck();
+                                        });
+                                }
+                                else {
+                                    // Style already loaded
+                                    loadedAssets ++;
+                                    assetsLoadedCheck();
+                                }
+                            });
+
+                            assetsLoadedCheck(); 
+                        });
+
+                        return; // Wait for the page to load
+                    }
+
+                    pageLoaded();
+                }
+
+                switchPage(global.page); 
+
+                let loginForm = document.getElementById("login-form");
+                let signupForm = document.getElementById("signup-form");
+                let loginSubmit = document.getElementById("login-submit");
+                let signupSubmit = document.getElementById("signup-submit");
+
+                function toggleTopmenuPopup() {
+                    let popup = document.getElementById("popup");
+                    let topmenuUserArrow = document.getElementById("topmenu-user-arrow");
+
+                    if (popup.style.opacity === "0") {
+                        topmenuUserArrow.style.transform = "rotateX(180deg)";
+
+                        popup.style.opacity = "1";
+                        popup.style.transform = "translateY(0)";
+                        popup.style.pointerEvents = ""; 
+
+                        popupState = 1;
+                    } else {
+                        topmenuUserArrow.style.transform = "rotateX(0deg)";
+                        popup.style.opacity = "0";
+                        popup.style.transform = "translateY(-10px)";
+                        popup.style.pointerEvents = "none"; 
+
+                        popupState = 0;
+                    }
+                }
+
+                function loginSwitchClick() {
+                    let login = document.getElementById("login");
+                    let signup = document.getElementById("signup");
+                    let highlight = document.getElementById("signin-switch-highlight");
+                    let loginSwitch = document.getElementById("login-switch");
+                    let signupSwitch = document.getElementById("signup-switch");
+
+                    login.style.display = "flex";
+                    signup.style.display = "none";
+
+                    highlight.style.left = "0";
+                    highlight.style.transform = "translateX(0)";
+
+                    loginSwitch.style.color = "white";
+                    signupSwitch.style.color = "black";
+
+                    document.getElementById("signin-error").style.display = "none";
+                }
+
+                function signupSwitchClick() {
+                    let login = document.getElementById("login");
+                    let signup = document.getElementById("signup");
+                    let highlight = document.getElementById("signin-switch-highlight");
+                    let loginSwitch = document.getElementById("login-switch");
+                    let signupSwitch = document.getElementById("signup-switch");
+
+                    login.style.display = "none";
+                    signup.style.display = "flex";
+
+                    highlight.style.left = "100%";
+                    highlight.style.transform = "translateX(-100%)";
+
+                    loginSwitch.style.color = "black";
+                    signupSwitch.style.color = "white";
+
+                    document.getElementById("signin-error").style.display = "none";
+                }
+
+                function loggedIn(checkSigninReload = false) {
+                    let auth_token = getCookie("auth_token");
+                    api.profile("Bearer " + auth_token, (res) => {
+                        if (res.status === 401) {
+                            loggedOut(); 
+                        }
+                        else {
+                            global.isLoggedIn = true;
+                            global.username = res.username;
+                            global.nickname = res.nickname; 
+                            global.bio = res.bio;
+                            document.getElementById("topmenu-user-username").innerText = res.nickname;
+
+                            document.getElementById("popup-signin").style.display = "none";
+                            document.getElementById("popup-user").style.display = "flex";
+
+                            if (checkSigninReload && global.requiresSigninReload) {
+                                switchPage(global.page);
+                            }
+                        }
+                    });
+                }
+
+                function loggedOut(checkSigninReload = false) {
+                    global.isLoggedIn = false;
+                    global.username = "";
+                    global.nickname = "";
+                    global.bio = "";
+                    document.getElementById("topmenu-user-username").innerText = "Log in / Sign up";
+
+                    document.getElementById("popup-signin").style.display = "block";
+                    document.getElementById("popup-user").style.display = "none";
+
+                    if (checkSigninReload && global.requiresSigninReload) {
+                        switchPage(global.page);
+                    }
+                }
+
+                if (getCookie("auth_token")) {
+                    loggedIn();
+                }
+                else {
+                    loggedOut();
+                }
+
+                function clearSigninForms() {
+                    loginForm.username.value = "";
+                    loginForm.password.value = "";
+                    signupForm.email.value = "";
+                    signupForm.username.value = "";
+                    signupForm.password.value = "";
+
+                    loginSwitchClick(); // Switch to login form
+                }
+
+                function login(username, password) {
+                    api.login(username, password, (res) => {
+                        if (!res.auth_token) {
+                            document.getElementById("signin-error").innerText = res.hint;
+                            document.getElementById("signin-error").style.display = "block";
+                        } 
+                        else {
+                            document.getElementById("signin-error").innerText = "";
+                            document.getElementById("signin-error").style.display = "none";
+                            setCookie("auth_token", res.auth_token, 1);
+
+                            clearSigninForms();
+
+                            loggedIn(true);
+                        }
+                    }); 
+                }
+
+                function signup(email, username, password) {
+                    api.signup(email, username, password, (res) => {
+                        if (!res.auth_token) {
+                            document.getElementById("signin-error").innerText = res.hint;
+                            document.getElementById("signin-error").style.display = "block";
+                        } 
+                        else {
+                            document.getElementById("signin-error").innerText = "";
+                            document.getElementById("signin-error").style.display = "none";
+                            setCookie("auth_token", res.auth_token, 1);
+
+                            clearSigninForms();
+
+                            loggedIn(true); 
+                        }
+                    }); 
+                }
+
+                function logOut() {
+                    deleteCookie("auth_token");
+                    loggedOut(true);
+                }
+
+                loginSubmit.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    let username = loginForm.username.value;
+                    let password = loginForm.password.value;
+                    login(username, password);
+                });
+                signupSubmit.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    let email = signupForm.email.value;
+                    let username = signupForm.username.value;
+                    let password = signupForm.password.value;
+                    signup(email, username, password);
+                });
+
+                let topmenuSpace = document.getElementById("topmenu-space"); 
+                let topmenuHotbar = document.getElementById("topmenu-hotbar"); 
+                let topmenuHotbarSpace2 = document.getElementById("topmenu-hotbar-space-2"); 
+
+                let topmenuUser = document.getElementById("topmenu-user");
+                let topmenuUserContainer = document.getElementById("topmenu-user-container"); 
+
+                let topmenuHotbarInner = document.getElementById("topmenu-hotbar-inner");
+                topmenuHotbarInner.querySelectorAll("a").forEach((a) => {
+                    a.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        let href = a.getAttribute("href");
+                        window.history.pushState({}, "", href);
+                        switchPage(href.split("/")[1]);
+                    });
+                });
+
+                let poweronHome = document.getElementById("poweron-home");
+                poweronHome.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    window.history.pushState({}, "", "/");
+                    switchPage("home");
+                });
+
+                function windowResized() {
+                    if (window.getComputedStyle(topmenuHotbar).getPropertyValue("display") === "none") {
+                        topmenuSpace.appendChild(topmenuHotbarInner); 
+                        topmenuHotbarInner.appendChild(topmenuUser); 
+                    }
+                    else {
+                        topmenuHotbar.insertBefore(topmenuHotbarInner, topmenuHotbarSpace2); 
+                        topmenuUserContainer.appendChild(topmenuUser); 
+                    }
+                }
+
+                window.addEventListener("resize", windowResized); 
+                windowResized(); 
+            </script>
+        </div>
+    </body>
+</html>

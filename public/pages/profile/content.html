@@ -1,0 +1,65 @@
+<div id="profile" style="display: none">
+    <section id="profile-header">
+        <h1 class="center" id="profile-nickname"><span class="loader">--------------------</span></h1>
+        <p class="center" id="profile-description"><span id="profile-username"><span class="loader">--------------------</span></span> - <span id="profile-bio"><span class="loader">------------------------------------------------------------</span></span></p>
+    </section>
+
+    <section id="profile-programs-section">
+        <h2 class="center" id="programs-title">Programs</h2>
+        <div id="programs"></div>
+    </section>
+</div>
+
+<div id="profile-not-logged-in" style="display: block">
+    <h1 class="center">Profile</h1>
+
+    <p class="center">You must be logged in to view your profile.</p>
+</div>
+
+<div id="profile-does-not-exist" style="display: block">
+    <h1 class="center">Profile</h1>
+
+    <p class="center">User does not exist.</p>
+</div>
+
+<script>
+    buffer.profile = document.getElementById("profile");
+    buffer.profileNotLoggedIn = document.getElementById("profile-not-logged-in");
+    buffer.profileDoesNotExist = document.getElementById("profile-does-not-exist"); 
+    buffer.profileNickname = document.getElementById("profile-nickname");
+    buffer.profileUsername = document.getElementById("profile-username");
+    buffer.profileBio = document.getElementById("profile-bio");
+
+    buffer.profileUrl = window.location.pathname.split("/")[2]; 
+
+    if (buffer.profileUrl || global.isLoggedIn) {
+        buffer.profile.style.display = "block";
+        buffer.profileNotLoggedIn.style.display = "none";
+        buffer.profileDoesNotExist.style.display = "none";
+
+        createProgramList(document.getElementById("programs"), "<?sandbox?>", { sort: "date", sortOrder: "descending", authorUsername: buffer.profileUrl || global.username, authorUsernameExactMatch: true });
+        
+        if (buffer.profileUrl) {
+            api.profile(buffer.profileUrl, (user) => {
+                if (user.status === 404) {
+                    buffer.profile.style.display = "none";
+                    // Ignoring profileNotLoggedIn because it was already hidden
+                    buffer.profileDoesNotExist.style.display = "block";
+                }
+                buffer.profileNickname.innerText = user.nickname;
+                buffer.profileUsername.innerText = "@" + user.username;
+                buffer.profileBio.innerText = user.bio || "No bio";
+            }); 
+        }
+        else {
+            buffer.profileNickname.innerText = global.nickname;
+            buffer.profileUsername.innerText = "@" + global.username;
+            buffer.profileBio.innerText = global.bio || "No bio";
+        }
+    }
+    else {
+        buffer.profile.style.display = "none";
+        buffer.profileNotLoggedIn.style.display = "block";
+        buffer.profileDoesNotExist.style.display = "none"; 
+    }
+</script>

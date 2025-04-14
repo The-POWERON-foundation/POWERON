@@ -1,0 +1,24 @@
+:root {
+    --background: #F4F4F9; 
+    --light-background: #FFFFFF; 
+    --very-light-background: #FFFFFF; 
+    --color: #000000;
+
+    --topmenu-background-left: #0048AA; 
+    --topmenu-background-right: #66CCFF;
+
+    --link-color: #0048AA; 
+    --highlight-color: black; 
+
+    /*--topmenu-popup-background: #C8C8C8;*/
+    --topmenu-popup-background: rgb(178, 229, 255);
+
+    --error: #FF0000; 
+    --error-background: #ffaeae; 
+    --error-border: #ff5151; 
+
+    --description: #666; 
+    --loader: #CCCCCC; 
+
+    --hover-background: rgba(0, 0, 0, .1); 
+}

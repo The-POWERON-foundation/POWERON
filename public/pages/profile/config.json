@@ -1,0 +1,12 @@
+{
+    "title": "Profile",
+    "scripts": [
+        "/cdn/scripts/program-list.js"
+    ],
+    "styles": [
+        "/cdn/styles/program-list.css", 
+        "/cdn/styles/profile.css"
+    ], 
+    "requiresSigninReload": true,
+    "content": "content.html"
+}

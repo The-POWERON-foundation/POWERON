@@ -1,0 +1,9 @@
+{
+    "title": "Settings",
+    "scripts": [],
+    "styles": [
+        "/cdn/styles/settings.css"
+    ], 
+    "requiresSigninReload": true,
+    "content": "content.html"
+}

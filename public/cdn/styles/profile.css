@@ -1,0 +1,33 @@
+#profile-header {
+    margin-bottom: 30px; 
+    margin-top: -10px; 
+}
+
+#profile-nickname {
+    color: var(--link-color); 
+    font-size: 2.2em; 
+    margin-bottom: 0; 
+    padding-bottom: 0;
+}
+
+#profile-username {
+    color: var(--highlight-color);
+}
+
+#profile-description {
+    color: var(--description); 
+    font-size: 1.1em; 
+
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#profile-programs-section {
+    padding: 40px; 
+    padding-top: 20px; 
+    padding-bottom: 30px; 
+}
+
+#programs-title {
+    font-size: 2em; 
+}
