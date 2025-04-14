@@ -357,8 +357,15 @@ body {
     width: calc(100% - 10px); 
     overflow: auto; 
 
+    display: flex; 
+    flex-direction: column;
+
     padding-right: 10px;
     /*padding-bottom: 10px;*/
+}
+
+#main-content-inner {
+    flex: 1; 
 }
 
 a {
