@@ -439,6 +439,7 @@ footer {
     color: white;
     padding: 20px;
     text-align: center;
+    border-radius: 5px; 
 }
 
 footer a {
@@ -450,6 +451,7 @@ footer ul {
     list-style: none;
     margin-bottom: 20px;
     margin-top: 0; 
+    padding: 0; 
 }
 
 footer ul li {
@@ -461,4 +463,10 @@ footer li {
     display: list-item;
     text-align: -webkit-match-parent;
     unicode-bidi: isolate;
+}
+
+#social-icons img {
+    height: 2em; 
+    padding-left: 0.25em; 
+    padding-right: 0.25em; 
 }
