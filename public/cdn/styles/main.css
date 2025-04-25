@@ -439,7 +439,7 @@ a {
 }
 
 footer {
-    background-color: var(--link-color);
+    background-color: var(--topmenu-background-left);
     color: white;
     padding: 20px;
     text-align: center;

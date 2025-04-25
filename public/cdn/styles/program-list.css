@@ -42,7 +42,7 @@
 .pagination button {
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: var(--link-color); 
+    background-color: var(--topmenu-background-left); 
     color: white;
     border: none;
     border-radius: 5px;

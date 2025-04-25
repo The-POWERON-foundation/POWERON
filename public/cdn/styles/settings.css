@@ -22,6 +22,8 @@
     background-color: var(--light-background);
     height: calc(100% - 5px); 
 
+    margin-right: 10px; 
+
     display: flex; 
     flex-direction: column;
 
@@ -29,6 +31,14 @@
     border-radius: 5px; 
 
     overflow: hidden; 
+}
+
+@media (max-width: 630px) {
+    #settings-menu {
+        position: absolute; 
+        margin-right: calc(100% - 200px); 
+        height: auto; 
+    }
 }
 
 #settings-menu button {
