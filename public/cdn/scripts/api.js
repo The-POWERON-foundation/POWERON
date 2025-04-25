@@ -58,3 +58,7 @@ PowerAPI.prototype.recentList = function(page, callback) {
 PowerAPI.prototype.programList = function(params, callback) {
     this.query("program-list", "POST", { "Content-Type": "application/json" }, "no-store", params, callback);
 }
+
+PowerAPI.prototype.editProfile = function(authorization, nickname, bio, callback) {
+    this.query("edit-profile", "POST", { "Authorization": authorization, "Content-Type": "application/json" }, "no-store", { nickname, bio }, callback);
+}

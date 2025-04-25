@@ -172,6 +172,24 @@ server.post("/api/program-list", (req, res) => {
 server.put("/api/program-list", methodNotAllowed); 
 server.delete("/api/program-list", methodNotAllowed); 
 
+/* Edit profile */
+server.get("/api/edit-profile", methodNotAllowed);
+server.post("/api/edit-profile", (req, res) => {
+    const { authorization } = req.headers;
+    const { nickname, bio } = req.body; 
+
+    api.editProfile(authorization, nickname, bio, (response) => {
+        if (response) {
+            res.json({});
+        }
+        else {
+            res.status(401).json({ status: 401, message: "Unauthorized" });
+        }
+    });
+});
+server.put("/api/edit-profile", methodNotAllowed);
+server.delete("/api/edit-profile", methodNotAllowed);
+
 /* Serve pages */
 server.use(cookieParser());
 

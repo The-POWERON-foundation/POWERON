@@ -261,19 +261,29 @@ function programList(params, callback) {
     });
 }
 
-function editProfile(auth_token, username, nickname, bio, callback) {
-    auth_token = auth_token.slice(7);
+function editProfile(authorization, nickname, bio, callback) {
+    auth_token = authorization.slice(7);
 
     auth_token = mysql.escape(auth_token); 
-    username = mysql.escape(username); 
     nickname = mysql.escape(nickname);
     bio = mysql.escape(bio);
 
-    query = `UPDATE users SET username = ${username}, nickname = ${nickname}, bio = ${bio} WHERE auth_token = ${auth_token}`; 
+    query = `SELECT id FROM users WHERE auth_token = ${auth_token}`;
+    mysqlConnection.query(query, (error, results) => {
+        if (error) throw error; 
+
+        if (!results[0]) {
+            callback(0); // No user found with the given auth_token
+            return;
+        }
+    });
+
+    query = `UPDATE users SET nickname = ${nickname}, bio = ${bio} WHERE auth_token = ${auth_token}`; 
 
     mysqlConnection.query(query, (error, results) => {
         if (error) throw error;
+        callback(1); // Check if any rows were changed
     });
 }
 
-module.exports = { profile, login, signup, recentList, programList };
+module.exports = { profile, login, signup, recentList, programList, editProfile };
