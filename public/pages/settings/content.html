@@ -3,20 +3,30 @@
     
     <div class="settings-container">
         <div id="settings-menu">
-            <div id="separator"></div>
             <button onclick="buffer.switchSettingsPage('profile')">Profile</button>
             <button onclick="buffer.switchSettingsPage('account')">Account</button>
         </div>
+
         <div id="settings-content">
             <div id="settings-profile" style="display: block">
                 <h1 class="center">Profile</h1>
 
                 <form action="#">
-                    Nickname: <input type="text" id="change-nickname">
-                    <br>
-                    Bio: <textarea id="change-bio"></textarea>
-                    <br>
-                    <input type="submit" value="Save">
+                    <table class="settings-table">
+                        <tbody>
+                            <tr>
+                                <th>Nickname: </th>
+                                <td><input type="text" id="change-nickname"></td>
+                            </tr>
+                            <tr>
+                                <th>Bio: </td>
+                                <td><textarea id="change-bio"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="submit" value="Change profile information" class="submit"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
             <div id="settings-account" style="display: none">
