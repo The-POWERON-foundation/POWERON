@@ -7,3 +7,6 @@ The ultimate all-in-one programming platform.
 ## Docs
  - Deployment - `docs/deploy.md`
  - REST API - `docs/api.md`
+
+## Discord server
+Join our **Discord server** for the latest updates: [https://discord.gg/75q8XvSUfb](https://discord.gg/75q8XvSUfb)
