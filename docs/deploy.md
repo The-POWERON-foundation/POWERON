@@ -4,6 +4,7 @@
 
 2. Clone the repository
    - `git clone https://github.com/The-POWERON-foundation/POWERON`
+   - `cd POWERON`
   
 3. Install required Node packages
    - `npm install`
