@@ -81,7 +81,7 @@
     buffer.changeBio = document.getElementById("change-bio");
 
     buffer.changeNickname.placeholder = global.nickname; 
-    buffer.changeBio.placeholder = global.bio;
+    buffer.changeBio.placeholder = global.bio || "No bio";
 
     buffer.changeProfileForm = document.getElementById("change-profile-form");
     buffer.changeProfileForm.onsubmit = function(event) {
