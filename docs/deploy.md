@@ -1,17 +1,17 @@
 # Deployment
 1. Install Node, NPM and MySQL server
-   - `sudo apt install node npm mysql-server`
+   - `sudo apt install npm mariadb-server`
   
 2. Install required Node packages
    - `npm install`
    
 3. Configure database
    - `sudo mysql_secure_installation`
-   - `mysql -u root –p`
-   - MySQL: `CREATE DATABASE [DB_NAME];`
-   - MySQL: `CREATE USER '[DB_USER]'@'[DB_HOST]' IDENTIFIED WITH mysql_native_password BY '[DB_PASS]';`
-   - MySQL: `GRANT SELECT, INSERT, UPDATE, DELETE ON [DB_NAME].* TO '[DB_USER]'@'[DB_HOST]' WITH GRANT OPTION;`
-   - MySQL: `USE [DB_NAME];`
+   - `sudo mysql -u root`
+   - MySQL: `CREATE DATABASE poweron;`
+   - MySQL: `CREATE USER 'poweron'@'localhost' IDENTIFIED BY 'password';`
+   - MySQL: `GRANT SELECT, INSERT, UPDATE, DELETE ON poweron.* TO 'poweron'@'localhost' WITH GRANT OPTION;`
+   - MySQL: `USE poweron;`
    - MySQL: `SOURCE setup/mysql-setup.sql;`
 
 4. Rename `template.env` to `.env` and modify the variables accordingly
