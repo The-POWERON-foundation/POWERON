@@ -80,8 +80,8 @@
     buffer.changeNickname = document.getElementById("change-nickname"); 
     buffer.changeBio = document.getElementById("change-bio");
 
-    buffer.changeNickname.placeholder = global.nickname; 
-    buffer.changeBio.placeholder = global.bio || "No bio";
+    buffer.changeNickname.value = global.nickname; 
+    buffer.changeBio.value = global.bio || "No bio";
 
     buffer.changeProfileForm = document.getElementById("change-profile-form");
     buffer.changeProfileForm.onsubmit = function(event) {
@@ -98,12 +98,6 @@
         if (bio.length > 0) {
             global.bio = bio; 
         }
-
-        buffer.changeNickname.placeholder = global.nickname; 
-        buffer.changeBio.placeholder = global.bio; 
-
-        buffer.changeNickname.value = ""; 
-        buffer.changeBio.value = ""; 
     
         api.editProfile("Bearer " + getCookie("auth_token"), global.nickname, global.bio, (response) => {
             if (response.status == 200) {
