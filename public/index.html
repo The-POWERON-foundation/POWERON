@@ -240,10 +240,9 @@
                         let mainContent = document.getElementById("main-content");
                         mainContent.style.justifyContent = ""; 
 
+                        document.title = pages[page].title;
                         mainContentInner.innerHTML = pages[page].content;
                         nodeScriptReplace(mainContentInner);
-
-                        document.title = pages[page].title;
 
                         global.requiresSigninReload = pages[page].requiresSigninReload; 
                     }
