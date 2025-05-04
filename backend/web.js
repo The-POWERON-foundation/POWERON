@@ -14,7 +14,6 @@ const root = process.cwd(); // Get the current working directory
 const server = express(); // Start the web server
 
 const index = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
-const notFound = fs.readFileSync(path.join(root, "public/404.html"), "utf8");
 
 const pages = {}; // Cache for pages
 
@@ -59,7 +58,7 @@ server.get("/api/pages/:page", (req, res) => {
         res.json(response);
     }
     else {
-        res.status(404).json({ status: 404, message: "Page not found" });
+        res.status(404).json(pages["404"]);
     }
 }); 
 server.post("/api/pages/:page", methodNotAllowed); 

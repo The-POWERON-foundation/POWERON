@@ -49,12 +49,16 @@
                 buffer.profileNickname.innerText = user.nickname;
                 buffer.profileUsername.innerText = "@" + user.username;
                 buffer.profileBio.innerText = user.bio || "No bio";
+
+                document.title = `${ user.nickname }(@${ user.username }) | POWERON`; // Set the page title to the user's nickname
             }); 
         }
         else {
             buffer.profileNickname.innerText = global.nickname;
             buffer.profileUsername.innerText = "@" + global.username;
             buffer.profileBio.innerText = global.bio || "No bio";
+
+            document.title = `${ global.nickname }(@${ global.username }) | POWERON`; // Set the page title to the user's nickname
         }
     }
     else {
