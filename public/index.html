@@ -531,6 +531,16 @@
                     switchPage("home");
                 });
 
+                let popupUser = document.getElementById("popup-user");
+                popupUser.querySelectorAll("a").forEach((a) => {
+                    a.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        let href = a.getAttribute("href");
+                        window.history.pushState({}, "", href);
+                        switchPage(href.split("/")[1]);
+                    });
+                });
+
                 function windowResized() {
                     if (window.getComputedStyle(topmenuHotbar).getPropertyValue("display") === "none") {
                         topmenuSpace.appendChild(topmenuHotbarInner); 
