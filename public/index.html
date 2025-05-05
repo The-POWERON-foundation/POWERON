@@ -231,15 +231,16 @@
                             intervals: [],
                         };
 
-                        let mainContentInner = document.getElementById("main-content-inner");
+                        /* let mainContentInner = document.getElementById("main-content-inner");
 
                         mainContentInner.style.display = "block"; 
                         mainContentInner.style.paddingBottom = "10px"; 
                         mainContentInner.style.alignItems = ""; 
 
                         let mainContent = document.getElementById("main-content");
-                        mainContent.style.justifyContent = ""; 
+                        mainContent.style.justifyContent = ""; */
 
+                        let mainContentInner = document.getElementById("main-content-inner");
                         document.title = pages[page].title;
                         mainContentInner.innerHTML = pages[page].content;
                         nodeScriptReplace(mainContentInner);
