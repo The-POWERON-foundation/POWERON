@@ -3,5 +3,6 @@
     "scripts": [],
     "styles": [], 
     "requiresSigninReload": true,
-    "content": "content.html"
+    "content": "content.html", 
+    "smallTopmenu": true
 }

@@ -478,3 +478,8 @@ footer li {
     padding-left: 0.25em; 
     padding-right: 0.25em; 
 }
+
+#topmenu-user-arrow-svg {
+    fill: rgba(255, 255, 255, .5); 
+    transform: translate(3px, -1px);
+}

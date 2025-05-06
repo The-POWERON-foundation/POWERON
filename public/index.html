@@ -12,6 +12,9 @@
     <body>
         <!-- Topmenu -->
         <div id="topmenu">
+            <!-- Small topmenu tools -->
+            <div id="topmenu-tools"></div>
+
             <!-- Hotbar -->
             <div id="topmenu-hotbar">
                 <div class="topmenu-hotbar-space"></div>
@@ -45,7 +48,7 @@
                     <span id="topmenu-user-username"><img src="/cdn/images/loading-white.svg" style="height: 15px"></span>
                     &nbsp;
                     <div id="topmenu-user-arrow">
-                        <svg width="10" height="7" viewBox="0 0 10 7" style="fill: rgba(255, 255, 255, .5); transform: translate(3px, -1px);" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="topmenu-user-arrow-svg" width="10" height="7" viewBox="0 0 10 7" xmlns="http://www.w3.org/2000/svg">
                             <path d="M 0, 0 L 10, 0 L 5, 7"></path>
                         </svg>  
                     </div>      
@@ -191,6 +194,49 @@
                 let hotbarBrowse = document.getElementById("hotbar-browse"); 
                 let hotbarProfile = document.getElementById("hotbar-profile"); 
 
+                let topmenuSmallState = 1; // Small state by default to prevent unexpected behavior on page load
+
+                function contractTopmenu() {
+                    topmenuSmallState = 1;
+
+                    /*let topmenuHotbarInner = document.getElementById("topmenu-hotbar-inner");
+                    if (window.getComputedStyle(topmenuHotbar).getPropertyValue("display") !== "none") {
+                        topmenuHotbar.insertBefore(topmenuHotbarInner, topmenuHotbarSpace2); 
+                        topmenuUserContainer.appendChild(topmenuUser); 
+                    }*/
+
+                    let topmenu = document.getElementById("topmenu");
+                    topmenu.style.color = "var(--main-color)";
+                    topmenu.style.background = "transparent";
+
+                    topmenuHotbarInner.style.display = "none";
+
+                    let poweronHome = document.getElementById("poweron-home");
+                    poweronHome.style.display = "none";
+
+                    let topmenuUserArrowSvg = document.getElementById("topmenu-user-arrow-svg");
+                    topmenuUserArrowSvg.style.fill = "var(--description)"; 
+                }
+
+                function expandTopmenu() {
+                    topmenuSmallState = 0;
+
+                    let topmenu = document.getElementById("topmenu");
+                    topmenu.style.color = ""; 
+                    topmenu.style.background = "";
+
+                    let topmenuHotbarInner = document.getElementById("topmenu-hotbar-inner");
+                    topmenuHotbarInner.style.display = "";
+
+                    let poweronHome = document.getElementById("poweron-home");
+                    poweronHome.style.display = "";
+
+                    let topmenuUserArrowSvg = document.getElementById("topmenu-user-arrow-svg");
+                    topmenuUserArrowSvg.style.fill = ""; 
+
+                    windowResized();
+                }
+
                 function switchPage(page) {
                     if (!page) {
                         page = "home"; 
@@ -239,6 +285,13 @@
 
                         let mainContent = document.getElementById("main-content");
                         mainContent.style.justifyContent = ""; */
+
+                        if (pages[page].smallTopmenu) {
+                            contractTopmenu();
+                        }
+                        else {
+                            expandTopmenu();
+                        }
 
                         let mainContentInner = document.getElementById("main-content-inner");
                         document.title = pages[page].title;
@@ -531,6 +584,14 @@
                 });
 
                 function windowResized() {
+                    if (topmenuSmallState === 1) {
+                        /* 
+                            If the topmenu is in small state, we don't need to do anything.
+                            Once the topmenu expands, we need to check if the hotbar is in the right place by calling this function. 
+                        */
+                        return; 
+                    }
+
                     if (window.getComputedStyle(topmenuHotbar).getPropertyValue("display") === "none") {
                         topmenuSpace.appendChild(topmenuHotbarInner); 
                         topmenuHotbarInner.appendChild(topmenuUser); 
