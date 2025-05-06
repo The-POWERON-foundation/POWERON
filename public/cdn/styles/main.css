@@ -509,3 +509,7 @@ footer li {
 
     text-align: center; 
 }
+
+.program a {
+    text-decoration: none; 
+}
