@@ -21,10 +21,13 @@
                                 <td><textarea id="change-bio"></textarea></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><input type="submit" value="Change profile information" class="submit"></td>
+                                <td colspan="2"><input type="submit" value="Change profile information" class="submit" style="margin-bottom: 1em"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><div class="success" style="display: none">Successfully changed profile information</div></td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table>                    
                 </form>
             </div>
             <div id="settings-account" style="display: none">
@@ -100,9 +103,7 @@
         }
     
         api.editProfile("Bearer " + getCookie("auth_token"), global.nickname, global.bio, (response) => {
-            if (response.status == 200) {
-                
-            }
+            document.querySelector("#change-profile-form .success").style.display = "block"; 
         });
     }
 </script>

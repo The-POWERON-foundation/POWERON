@@ -483,3 +483,29 @@ footer li {
     fill: rgba(255, 255, 255, .5); 
     transform: translate(3px, -1px);
 }
+
+.error {
+    color: var(--error); 
+
+    padding: 7px; 
+
+    word-wrap: break-word;
+
+    border: 1px solid var(--error-border); 
+    background: var(--error-background); 
+
+    text-align: center; 
+}
+
+.success {
+    color: var(--success); 
+
+    padding: 7px; 
+
+    word-wrap: break-word;
+
+    border: 1px solid var(--success-border); 
+    background: var(--success-background); 
+
+    text-align: center; 
+}

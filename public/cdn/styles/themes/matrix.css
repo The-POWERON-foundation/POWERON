@@ -12,9 +12,13 @@
 
     --topmenu-popup-background: #818181;
 
-    --error: #0b8000; 
-    --error-background: #a8ff99; 
-    --error-border: #1fce00; 
+    --error: #FF0000; 
+    --error-background: #ffaeae; 
+    --error-border: #ff5151; 
+
+    --success: #00aa00;
+    --success-background: #aeffae;
+    --success-border: #51ff51;
 
     --description: #AAA; 
     --loader: #7C7B78; 
