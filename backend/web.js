@@ -6,12 +6,15 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const api = require("./api.js");
 const cookieParser = require("cookie-parser");
+const http = require("http");
+const MonacoLiveEditor = require("monaco-live-editor");
 
 const env = process.env;
 
 const root = process.cwd(); // Get the current working directory
 
 const server = express(); // Start the web server
+const httpServer = http.createServer(server); // Create an HTTP server
 
 const index = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
 
@@ -189,15 +192,27 @@ server.post("/api/edit-profile", (req, res) => {
 server.put("/api/edit-profile", methodNotAllowed);
 server.delete("/api/edit-profile", methodNotAllowed);
 
+/* Monaco Live Editor */
+let editor = new MonacoLiveEditor(); 
+editor.setShowLog(true); // Show log
+editor.setWorkspaceFolder(path.resolve(__dirname, "../programs")); 
+editor.setTemplateFolder(path.resolve(__dirname, "../template-workspace"));
+editor.requestConnect = (params) => {
+    let workspace = path.resolve(params.workspace);
+    console.log("Requesting connection to workspace: " + workspace);
+}; 
+editor.startServer(server, httpServer); 
+
 /* Serve pages */
 server.use(cookieParser());
 
 /* Serve index */
-server.get("*", function(req, res) {
+server.get("*", function(req, res, next) {
+    if (req.url.startsWith("/monaco-live-editor") || req.url.startsWith("/monaco-editor")) return next(); // Ignore monaco live editor requests
     res.send(index); 
 });
 
 /* Start server on port 80 */
-server.listen(80, () => {
+httpServer.listen(80, () => {
     console.log("Web server started on port 80");
 }); 

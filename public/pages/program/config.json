@@ -1,7 +1,11 @@
 {
     "title": "Program | POWERON",
-    "scripts": [],
-    "styles": [], 
+    "scripts": [
+        "/cdn/scripts/editor.js"
+    ],
+    "styles": [
+        "/cdn/styles/editor.css"
+    ], 
     "requiresSigninReload": true,
     "content": "content.html", 
     "smallTopmenu": true

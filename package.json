@@ -4,6 +4,7 @@
     "dotenv": "^16.4.7",
     "email-validator": "^2.0.4",
     "express": "^4.21.2",
+    "monaco-live-editor": "^2.4.1",
     "mysql": "^2.18.1",
     "path": "^0.12.7"
   },

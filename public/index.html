@@ -8,6 +8,11 @@
         <script src="/cdn/scripts/cookie-parser.js"></script>
         <link rel="icon" type="image/svg" href="/cdn/images/favicon.svg">
         <link rel="apple-touch-icon" href="/cdn/images/favicon.svg">
+
+        <!-- Monaco Live Editor -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/monaco-editor/min/vs/loader.js"></script>
+        <script src="/monaco-live-editor/monaco-live-editor.js"></script>
     </head>
     <body>
         <!-- Topmenu -->
@@ -259,6 +264,19 @@
                             break;
                     }
 
+                    const mainContent = document.getElementById("main-content");
+                    const mainContentInner = document.getElementById("main-content-inner");
+                    let content = document.getElementById("content");
+
+                    if (page === "program") {
+                        mainContentInner.style.overflow = "hidden"; 
+                        mainContentInner.style.paddingBottom = "0"; 
+                        content.style.margin = "0"; 
+                        content.style.width = "100%"; 
+                        /* Hide footer */
+                        document.querySelector("footer").style.display = "none";
+                    }
+
                     global.page = page; 
 
                     function pageLoaded() {
@@ -325,7 +343,7 @@
                                             scriptNode.innerHTML = text;
                                             document.body.appendChild(scriptNode);
 
-                                            nodeScriptReplace(scriptNode);
+                                            // nodeScriptReplace(scriptNode);
 
                                             loadedAssets ++;
                                             assetsLoadedCheck();
