@@ -17,6 +17,7 @@ const server = express(); // Start the web server
 const httpServer = http.createServer(server); // Create an HTTP server
 
 const index = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
+const editorPage = fs.readFileSync(path.join(root, "public/editor.html"), "utf8");
 
 const pages = {}; // Cache for pages
 
@@ -205,6 +206,11 @@ editor.startServer(server, httpServer);
 
 /* Serve pages */
 server.use(cookieParser());
+
+/* Editor page */
+server.get("/editor", function(req, res) {
+    res.send(editorPage);
+});
 
 /* Serve index */
 server.get("*", function(req, res, next) {

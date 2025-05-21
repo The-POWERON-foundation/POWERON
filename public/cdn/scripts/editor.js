@@ -1,16 +1,8 @@
-buffer.getParentElementInterval = setTimeout(() => {
-    buffer.parentElement = document.getElementById("editor"); 
+let parentElement = document.getElementById("editor"); 
+let editor = new MonacoLiveEditor(parentElement); 
 
-    if (buffer.parentElement) {
-        clearInterval(buffer.getParentElementInterval);
-        onLoad(); 
-    }
-}, 1000);
+editor.joinWorkspace("markusprograms"); 
 
-function onLoad() {
-    buffer.editor = new MonacoLiveEditor(buffer.parentElement); 
-    buffer.editor.joinWorkspace("markusprograms"); 
-    buffer.editor.onError = (error) => {
-        alert(error); 
-    }; 
-}
+editor.onError = (error) => {
+    alert(error); 
+}; 
