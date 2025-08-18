@@ -219,6 +219,6 @@ server.get("*", function(req, res, next) {
 });
 
 /* Start server on port 80 */
-httpServer.listen(80, () => {
-    console.log("Web server started on port 80");
+httpServer.listen(env.WEB_PORT, () => {
+    console.log("Web server started on port " + env.WEB_PORT);
 }); 
