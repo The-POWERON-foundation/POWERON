@@ -1,7 +1,7 @@
 let parentElement = document.getElementById("editor"); 
 let editor = new MonacoLiveEditor(parentElement); 
 
-editor.joinWorkspace("markusprograms"); 
+editor.joinWorkspace("1"); 
 
 editor.onError = (error) => {
     alert(error); 
