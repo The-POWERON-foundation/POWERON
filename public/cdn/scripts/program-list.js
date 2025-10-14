@@ -296,6 +296,7 @@ function createProgramList(element, sandboxUrl, params, advancedSearch = false) 
     function loadPrograms(page) {
         programsDiv.innerHTML = ""; // Clear the programs div before loading new programs
 
+        programsDiv.className = "programs"; // Reset class name (in case it was changed to "center" when no programs were found)
         loader(); 
 
         params.page = page;
