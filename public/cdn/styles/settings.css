@@ -87,6 +87,8 @@
     border-radius: 5px; 
 
     resize: none; 
+
+    font-size: 1em; 
 }
 
 .settings-table textarea {
