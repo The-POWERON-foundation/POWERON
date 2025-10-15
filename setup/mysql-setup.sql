@@ -19,6 +19,5 @@ CREATE TABLE `programs` (
     `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `language` varchar(32) NOT NULL,
     `forked_from_program_id` int DEFAULT NULL,
-    `forked_from_author_id` int DEFAULT NULL,
     `url_title` varchar(32) NOT NULL
 );
