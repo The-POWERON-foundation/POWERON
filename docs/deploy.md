@@ -13,7 +13,6 @@
    - `npm install`
    
 5. Configure database
-   - `sudo mysql_secure_installation`
    - `sudo mysql -u root`
    - MySQL: `CREATE DATABASE poweron;`
    - MySQL: `CREATE USER 'poweron'@'localhost' IDENTIFIED BY 'password';`
