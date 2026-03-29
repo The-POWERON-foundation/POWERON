@@ -201,17 +201,9 @@ let editor = new MonacoLiveEditor();
 editor.setShowLog(true); // Show log
 editor.setWorkspaceFolder(path.resolve(__dirname, "../programs")); 
 editor.authenticate = (token, workspace, callback) => {
-    console.log(token); 
-    console.log(workspace); 
-    console.log(callback); 
-
-    callback(false); // TODO: Replace with authentication
-
-    /*if (token === "1234") {
-        callback(true);
-    } else {
-        callback(false);
-    }*/
+    api.ownsProgram(workspace, token, (ownsProgram) => {
+        callback(ownsProgram); 
+    });
 }
 editor.startServer(server, httpServer); 
 

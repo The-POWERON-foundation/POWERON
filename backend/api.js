@@ -271,4 +271,22 @@ function programInfo(id, callback) {
     });
 }
 
-module.exports = { profile, login, signup, programList, editProfile, programInfo };
+function ownsProgram(program_id, auth_token, callback) {
+    /* Private function for verifying whether the user owns the program */
+    auth_token = mysql.escape(auth_token); 
+
+    query = `SELECT id FROM programs WHERE id = ${program_id} AND author = (SELECT id FROM users WHERE auth_token = ${auth_token})`;
+
+    mysqlConnection.query(query, (error, results) => {
+        if (error) throw error;
+
+        if (results[0]) {
+            callback(true); // The user owns the program
+        }
+        else {
+            callback(false); 
+        }
+    });
+}
+
+module.exports = { profile, login, signup, programList, editProfile, programInfo, ownsProgram };
