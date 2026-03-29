@@ -50,12 +50,12 @@ function profile(identifier, callback) {
     if (identifier.indexOf("Bearer ") === 0) {
         let auth_token = identifier.slice(7);
         auth_token = mysql.escape(auth_token); 
-        query = `SELECT id, username, nickname, bio, reg_date FROM users WHERE auth_token = ${auth_token}`; 
+        query = `SELECT id, username, nickname, bio, registration_date FROM users WHERE auth_token = ${auth_token}`; 
     } 
     else {
         let username = identifier;
         username = mysql.escape(username); 
-        query = `SELECT id, username, nickname, bio, reg_date FROM users WHERE username = ${username}`;
+        query = `SELECT id, username, nickname, bio, registration_date FROM users WHERE username = ${username}`;
     }
 
     mysqlConnection.query(query, (error, results) => {
@@ -174,10 +174,10 @@ function programList(params, callback) {
         conditions += " AND "; 
 
         if (params.authorUsernameExactMatch) {
-            conditions += `author_id = (SELECT id FROM users WHERE username=${mysql.escape(params.authorUsername)})`;
+            conditions += `author = (SELECT id FROM users WHERE username=${mysql.escape(params.authorUsername)})`;
         }
         else {
-            conditions += `author_id = (SELECT id FROM users WHERE username LIKE ${mysql.escape(`%${params.authorUsername}%`)})`;
+            conditions += `author = (SELECT id FROM users WHERE username LIKE ${mysql.escape(`%${params.authorUsername}%`)})`;
         }
     }
 
@@ -185,10 +185,10 @@ function programList(params, callback) {
         conditions += " AND ";
 
         if (params.authorNicknameExactMatch) {
-            conditions += `author_id = (SELECT id FROM users WHERE nickname=${mysql.escape(params.authorNickname)})`;
+            conditions += `author = (SELECT id FROM users WHERE nickname=${mysql.escape(params.authorNickname)})`;
         }
         else {
-            conditions += `author_id = (SELECT id FROM users WHERE nickname LIKE ${mysql.escape(`%${params.authorNickname}%`)})`;
+            conditions += `author = (SELECT id FROM users WHERE nickname LIKE ${mysql.escape(`%${params.authorNickname}%`)})`;
         }
     }
 
@@ -227,7 +227,7 @@ function programList(params, callback) {
             break;
     }
 
-    let query = `SELECT title, username, nickname, language, url_title FROM users, programs WHERE users.id = programs.author_id${conditions} ORDER BY ${sort} LIMIT ${programsPerPage} OFFSET ${page * programsPerPage}`; 
+    let query = `SELECT programs.id, title, username, nickname, language FROM users, programs WHERE users.id = programs.author${conditions} ORDER BY ${sort} LIMIT ${programsPerPage} OFFSET ${page * programsPerPage}`; 
 
     mysqlConnection.query(query, (error, programResults) => {
         if (error) throw error; 
