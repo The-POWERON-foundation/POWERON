@@ -1,3 +1,5 @@
+const SHOW_PROGRAM_LOADERS = false; // Whether to show placeholders while loading programs
+
 function escapeHtml(unsafe) {
     return unsafe
          .replace(/&/g, "&amp;")
@@ -296,7 +298,9 @@ function createProgramList(element, sandboxUrl, params, advancedSearch = false) 
     function loadPrograms(page) {
         programsDiv.innerHTML = ""; // Clear the programs div before loading new programs
 
-        loader(); 
+        if (SHOW_PROGRAM_LOADERS) {
+            loader(); 
+        }
 
         params.page = page;
         pageElement.innerText = page + 1;
