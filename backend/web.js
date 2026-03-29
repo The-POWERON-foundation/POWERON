@@ -180,6 +180,22 @@ server.post("/api/edit-profile", (req, res) => {
 server.put("/api/edit-profile", methodNotAllowed);
 server.delete("/api/edit-profile", methodNotAllowed);
 
+/* Get program info */
+server.get("/api/program-info/:id", (req, res) => {
+    const { id } = req.params;
+    api.programInfo(id, (program) => {
+        if (program) {
+            res.json(program);
+        }
+        else {
+            res.status(404).json({ status: 404, message: "Program not found" });
+        }
+    });
+}); 
+server.post("/api/program-info/:id", methodNotAllowed); 
+server.put("/api/program-info/:id", methodNotAllowed); 
+server.delete("/api/program-info/:id", methodNotAllowed); 
+
 /* Monaco Live Editor */
 let editor = new MonacoLiveEditor(); 
 editor.setShowLog(true); // Show log

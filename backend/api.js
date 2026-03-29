@@ -260,4 +260,15 @@ function editProfile(authorization, nickname, bio, callback) {
     });
 }
 
-module.exports = { profile, login, signup, programList, editProfile };
+function programInfo(id, callback) {
+    query = `SELECT * FROM programs WHERE id = ${id}`;
+
+    mysqlConnection.query(query, (error, results) => {
+        if (error) throw error;
+
+        const result = results[0];
+        callback(result);
+    });
+}
+
+module.exports = { profile, login, signup, programList, editProfile, programInfo };

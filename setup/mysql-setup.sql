@@ -14,7 +14,7 @@ CREATE TABLE `users` (
 CREATE TABLE `programs` (
     `id` int UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
     `title` varchar(128) NOT NULL,
-    `author` int NULL,
+    `author` int NOT NULL,
     `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `language` varchar(32) NOT NULL,
