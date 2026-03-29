@@ -134,33 +134,6 @@ function signup(email, username, password, callback) {
     }); 
 }
 
-function recentList(page, callback) {
-    const programsPerPage = 30; 
-
-    page = parseInt(page) || 0; 
-
-    page = Math.max(0, page);
-
-    mysqlConnection.query(`SELECT title, author, language, url_title FROM programs ORDER BY creation_date DESC LIMIT ${programsPerPage} OFFSET ${page * programsPerPage}`, (error, programResults) => {
-        if (error) throw error; 
-
-        mysqlConnection.query(`SELECT COUNT(*) AS total FROM programs`, (error, countResults) => {
-            if (error) throw error; 
-
-            const total = countResults[0].total; 
-            const totalPages = Math.ceil(total / programsPerPage); 
-
-            const results = { 
-                total, 
-                totalPages, 
-                programs: programResults
-            };
-
-            callback(results); 
-        });
-    });
-}
-
 function programList(params, callback) {
     const programsPerPage = 30; 
 
@@ -287,4 +260,4 @@ function editProfile(authorization, nickname, bio, callback) {
     });
 }
 
-module.exports = { profile, login, signup, recentList, programList, editProfile };
+module.exports = { profile, login, signup, programList, editProfile };

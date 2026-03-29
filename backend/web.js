@@ -151,19 +151,6 @@ server.post("/api/signup", (req, res) => {
 server.put("/api/signup", methodNotAllowed); 
 server.delete("/api/signup", methodNotAllowed); 
 
-/* Recent list */
-server.get("/api/browse/recent", (req, res) => {
-    let { page } = req.query; 
-    page = parseInt(page) || 0; 
-
-    api.recentList(page, (response) => {
-        res.json(response); 
-    }); 
-}); 
-server.post("/api/browse/recent", methodNotAllowed); 
-server.put("/api/browse/recent", methodNotAllowed); 
-server.delete("/api/browse/recent", methodNotAllowed); 
-
 /* Program list */
 server.get("/api/program-list", methodNotAllowed); 
 server.post("/api/program-list", (req, res) => {

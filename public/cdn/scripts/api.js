@@ -51,10 +51,6 @@ PowerAPI.prototype.signup = function(email, username, password, callback) {
     this.query("signup", "POST", { "Content-Type": "application/json" }, "no-store", { email, username, password }, callback);
 }
 
-PowerAPI.prototype.recentList = function(page, callback) {
-    this.query("browse/recent?page=" + page, "GET", {}, "no-store", {}, callback);
-} 
-
 PowerAPI.prototype.programList = function(params, callback) {
     this.query("program-list", "POST", { "Content-Type": "application/json" }, "no-store", params, callback);
 }
