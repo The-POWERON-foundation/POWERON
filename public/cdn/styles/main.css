@@ -189,7 +189,7 @@ body {
     margin: 5px; 
 
     padding: 7px; 
-    width: 181px;
+    width: 179px;
 
     word-wrap: break-word;
 
@@ -203,8 +203,6 @@ body {
     background: #FFFFFF; 
     border-radius: 5px; 
     margin-bottom: 10px; 
-
-    width: 205px; 
     
     position: relative; 
 }
@@ -259,14 +257,15 @@ body {
     background: var(--topmenu-background-left);
     border-radius: 5px; 
 
-    height: calc(1em + 20px); 
+    width: 200px; 
+    height: 2em; 
     overflow: hidden; 
 
     margin-bottom: 10px; 
 }
 
 .form-input-icon-container {
-    height: calc(100% - 14px); 
+    height: calc(2em - 14px); 
     aspect-ratio: 1 / 1;
 
     padding: 7px; 
@@ -279,6 +278,7 @@ body {
 .form-input-text {
     font-family: 'Roboto', sans-serif;
 
+    width: calc(200px - 2em - 14px); 
     height: 100%; 
     border: none; 
     outline: none; 
