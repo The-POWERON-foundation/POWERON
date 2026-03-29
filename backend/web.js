@@ -197,11 +197,19 @@ server.delete("/api/edit-profile", methodNotAllowed);
 let editor = new MonacoLiveEditor(); 
 editor.setShowLog(true); // Show log
 editor.setWorkspaceFolder(path.resolve(__dirname, "../programs")); 
-editor.setTemplateFolder(path.resolve(__dirname, "../template-workspace"));
-editor.requestConnect = (params) => {
-    let workspace = path.resolve(params.workspace);
-    console.log("Requesting connection to workspace: " + workspace);
-}; 
+editor.authenticate = (token, workspace, callback) => {
+    console.log(token); 
+    console.log(workspace); 
+    console.log(callback); 
+
+    callback(false); // TODO: Replace with authentication
+
+    /*if (token === "1234") {
+        callback(true);
+    } else {
+        callback(false);
+    }*/
+}
 editor.startServer(server, httpServer); 
 
 /* Serve pages */
